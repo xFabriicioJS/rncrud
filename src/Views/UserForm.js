@@ -12,21 +12,21 @@ const UserForm = ({route, navigation}) => {
       <Text>Nome</Text>
       <TextInput
         style={style.input}
-        onChangeText={(name) => setUser(...user, name)}
+        onChangeText={(name)=>setUser({...user, name})}
         value={user.name}
         placeholder="Informe o nome"
       />
      <Text>Email</Text>
      <TextInput
        style={style.input}
-       onChangeText={(email) => setUser(...user, email)}
+       onChangeText={(email) => setUser({...user, email})}
        value={user.email}
        placeholder="Informe o Email"
      />
       <Text>Url do Avatar</Text>
      <TextInput
        style={style.input}
-       onChangeText={(avatarUrl) => setUser(...user, urlAvatar)}
+       onChangeText={(avatarUrl) => setUser({...user, avatarUrl})}
        value={user.avatarUrl}
        placeholder="Informe a URL do Avatar"
      />

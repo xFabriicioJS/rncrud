@@ -1,9 +1,10 @@
 import { View, Text, Alert } from 'react-native'
-import React from 'react'
-import users from '../data/users'
+import React, { useContext } from 'react'
+
 
 import { ListItem, Avatar, Icon } from "@rneui/themed";
 import { Button } from '@rneui/base';
+import UsersContext from '../context/UsersContext';
 
 
 export default function UserList(props) {
@@ -11,11 +12,15 @@ export default function UserList(props) {
  
 
 
+ const { state, dispatch } =  useContext(UsersContext)
+
+
+
 
 
   return (
     <View>
-     {users.map((user, id)=> (
+     {state.users.map((user, id)=> (
         <ListItem.Swipeable
          onPress={()=>{props.navigation.navigate("UserForm", user)}}
          key={id}
@@ -28,23 +33,28 @@ export default function UserList(props) {
             buttonStyle={{minHeight: '100%'}}
             />
          )}
-         rightContent={(confirmUserDelection)=>(
+         rightContent={()=>(
           <Button
             title="Delete"
-            onPress={(user) => {
-              Alert.alert('Excluir Usuário', 'Deseja excluir o usuário?',[
-                {
-                  text: 'Não'
-                 
-                },
-                {
-                  text: 'Sim',
-
-                  onPress(){
-                    console.warn('delete')
+            onPress={function deleteUser(){
+              {
+                Alert.alert('Excluir Usuário', 'Deseja excluir o usuário?',[
+                  {
+                    text: 'Não'
+                   
+                  },
+                  {
+                    text: 'Sim',
+            
+                    onPress(){
+                      dispatch({
+                      type: 'deleteUser',
+                      payload: user,
+                     })
+                    }
                   }
-                }
-              ])
+                ])
+              }
             }}
 
             icon={{ name: 'delete', color: 'white' }}
