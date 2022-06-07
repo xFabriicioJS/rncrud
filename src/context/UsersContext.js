@@ -10,17 +10,43 @@ export function UsersProvider({children}){
 
 
 
+
     function reducer(state, action){
-       if(action.type === 'deleteUser'){
+
+       
+
+        switch (action.type) {
+
+            
+            case 'deleteUser':
+            
             const user = action.payload
             return{
+                
                 ...state,
                 users: state.users.filter(u => u.id !== user.id)
-          }
+            }
+            case 'createUser':
+                const newUser = action.payload    
+                newUser.id = Math.random();
+                return{
+                    ...state,
+                    users: [...state.users, newUser]
+
+                }
+
+        }
+
+    //    if(action.type === 'deleteUser'){
+    //         const user = action.payload
+    //         return{
+    //             ...state,
+    //             users: state.users.filter(u => u.id !== user.id)
+    //       }
         
-        return state
-       }
-       return state
+    //     return state
+    //    }
+    //    return state
     }
 
     const [state, dispatch] = useReducer(reducer, initialState)
