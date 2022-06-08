@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 const UserForm = ({route, navigation}) => {
 
   const [user, setUser] = useState(route.params ? route.params : {})
+  const { dispatch } = useContext(UsersContext)
 
   return (
  
@@ -33,9 +34,10 @@ const UserForm = ({route, navigation}) => {
      <Button
      title='Salvar'
      onPress={()=> {
-       //função para salvar
-       //blablallba
-       
+       dispatch({
+         type: user.id ? 'updateUser' : 'createUser',
+         payload: user
+       })
        navigation.goBack()
      }}
      />

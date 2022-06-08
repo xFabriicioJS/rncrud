@@ -34,6 +34,12 @@ export function UsersProvider({children}){
                     users: [...state.users, newUser]
 
                 }
+           case 'updateUser':
+               const updatedUser = action.payload
+               return{
+                   ...state,
+                   users: state.users.map(u => u.id === updatedUser.id ? updatedUser : u)
+               }
 
         }
 
